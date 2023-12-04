@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Clima</title>
+</head>
+
+<body>
+    <div class="card">
+        <div class="search">
+            <input type="text" placeholder="Escriba la ciudad deseada" spellcheck="false">
+            <button>Buscar Clima</button>
+        </div>
+        <div class="error">
+            <p>Ciudad no valida</p>
+        </div>
+        <div class="weather">
+            <h1 class="temp"></h1>
+            <h2 class="city"></h2>
+            <p class="description"></p>
+            <div class="details">
+
+                
+                <h3 class="temp_max"></h3>
+                <h3 class="temp_min"></h3>
+                <div class="col">
+                    <div>
+                        <p class="humidity"></p>
+                        <p>Humedad</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const apiKey = "5b0993bacbc31c3bc7420ceea7c2a322";
+        const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&lang=sp&q=";
+        const searchBox = document.querySelector(".search input");
+        const searchBtn = document.querySelector(".search button");
+
+        async function chechWeather(city) {
+            const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
+
+
+            if (response.status == 404) {
+                document.querySelector(".error").style.display = "block";
+                document.querySelector(".weather").style.display = "none";
+            } else {
+                var data = await response.json();
+
+                console.log(data);
+
+
+                document.querySelector(".city").innerHTML = data.name;
+                document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°C";
+                document.querySelector(".description").innerHTML = data.weather[0].description;
+                document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
+                document.querySelector(".temp_max").innerHTML = data.main.temp_max +"°C" + " Temperatura Máxima";
+                document.querySelector(".temp_min").innerHTML = data.main.temp_min + "°C" +" Temperatura Mínima";
+                
+                document.querySelector(".weather").style.display="block";
+                document.querySelector(".error").style.display="none";
+            }
+
+
+        }
+
+        searchBtn.addEventListener("click", () => {
+            chechWeather(searchBox.value);
+        })
+
+    </script>
+</body>
+
+</html>
