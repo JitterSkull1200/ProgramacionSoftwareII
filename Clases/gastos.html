@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Gastos</title>
+</head>
+
+<body>
+    <h2>Gastos Diarios</h2>
+    <div class="container">
+        <form id="formulario">
+            <input type="number" name="cantidad" id="cantidad" class="cantidad" placeholder="0.0" required>
+            <select name="" id="categoria">
+                <option >Comida</option>
+                <option >Transporte</option>
+                <option >Salud</option>
+                <option >Educación</option>
+                <option >Entretenimiento</option>
+            </select>
+            <textarea name="descripcion" id="descripcion" rows="3"></textarea>
+            <button type="submit">Guardar</button>
+        </form>
+    </div>
+    <ul id="lista">
+
+    </ul>
+    <h5 id="total"></h5>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
