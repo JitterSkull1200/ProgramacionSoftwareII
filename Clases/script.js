@@ -25,6 +25,7 @@ class ControlGastos{
         localStorage.setItem("gastos",JSON.stringify(this.gastos));
 
         return gasto;
+        
 
     }
 
@@ -90,4 +91,12 @@ function calcularTotal() {
 
     total.innerHTML = "Total $" + control.obtenerTotal();
 }
+const btnClear = document.getElementById("btnClear");
+
+btnClear.addEventListener('click', function(){
+    localStorage.removeItem('gastos');
+    lista.innerHTML = '';
+    control.gastos = [];
+    calcularTotal();
+})
 
